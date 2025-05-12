@@ -16,6 +16,7 @@ Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset
   - [Results](#results)
   - [Fine-Tuned Model Weights](#fine-tuned-model)
   - [Paper](#paper)
+  - [Dataset](#dataset)
 
 This repo provides scripts to fine-tune YOLO models on the MMLA dataset. The [MMLA dataset](https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182) is a collection of low-altitude aerial footage of various species in different environments. The dataset is designed to help researchers and practitioners develop and evaluate object detection models for wildlife monitoring and conservation.
 
@@ -24,10 +25,6 @@ This repo provides scripts to fine-tune YOLO models on the MMLA dataset. The [MM
 
 ### Requirements
 ```bash
-# create and activate conda environment 
-conda create -n yolo_env python=3.8
-conda activate yolo_env
-
 # install packages from requirements
 conda create --name yolo_env --file requirements.txt
 # OR using pip
@@ -111,17 +108,18 @@ Our fine-tuned YOLO11m model achieves the following performance on the MMLA data
 | Dog     | 3,022  | 13,459    | 0.973  | 0.998 | 0.995 | 0.860    |
 
 
-
 # Fine-Tuned Model
-
 See [HuggingFace Repo](https://huggingface.co/imageomics/mmla) for details and weights.
+
+# Dataset
+See [HuggingFace Repo](https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182) for MMLA dataset.
 
 # Paper
 ```bibtex
-@article{mmla2023,
+@article{kline2025mmla,
   title={MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset},
-  author={Liu, Yifan and Wang, Yuxin and Zhang, Yifan and Li, Zhaoyang and Liu, Yuxin and Wang, Yifan and Zhang, Yifan and Li, Zhaoyang and Liu, Yuxin and Wang, Yifan and Zhang, Yifan and Li, Zhaoyang},
-  journal={arXiv preprint arXiv:2309.12345},
-  year={2023}
+  author={Kline, Jenna and Stevens, Samuel and Maalouf, Guy and Saint-Jean, Camille Rondeau and Ngoc, Dat Nguyen and Mirmehdi, Majid and Guerin, David and Burghardt, Tilo and Pastucha, Elzbieta and Costelloe, Blair and others},
+  journal={arXiv preprint arXiv:2504.07744},
+  year={2025}
 }
 ```
