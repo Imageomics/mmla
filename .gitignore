@@ -1,0 +1,47 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment directories
+venv/
+.env/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+
+# Ignore compiled files
+*.o
+*.so
+
+# Ignore dataset or large files
+*.csv
+*.tsv
+*.json
+*.xml
+*.h5
+*.zip
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Git-specific files
+*.orig
+
+# Ignore runs 
+runs/
+
+# Ignore to do list
+TODO.md
+
+# Ignore large files 
+/data
+
