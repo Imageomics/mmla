@@ -1,24 +1,22 @@
-# MMLA Repo
-Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset
+# MMLA Project 
+## Multi-Environment, Multi-Species, Low-Altitude Drone Dataset
 
 ![zebras_giraffes](docs/images/hero-image.jpg)
 Example photo from the MMLA dataset and labels generated from model. The image shows a group of zebras and giraffes at the Mpala Research Centre in Kenya. 
 ## Table of Contents
+  - [Introduction](#introduction)
   - [How to use the scripts in this repo](#how-to-use-the-scripts-in-this-repo)
     - [Requirements](#requirements)
-  - [Baseline YOLO evaluation](#baseline-yolo-evaluation)
-    - [Download evaluation data from HuggingFace](#download-evaluation-data-from-huggingface)
-    - [Run the evaluate_yolo script](#run-the-evaluate_yolo-script)
-  - [Model Training](#model-training)
-    - [Prepare the dataset](#prepare-the-dataset)
-    - [Optional: Downsample the frames](#optional-downsample-the-frames)
-    - [Run the training script](#run-the-training-script)
-  - [Evaluation](#evaluation)
-    - [Optional: Perform bootstrapping](#optional-perform-bootstrapping)
+    - [Model Training](#model-training)
+        - [Prepare the dataset](#prepare-the-dataset)
+        - [Run the training script](#run-the-training-script)
+    - [Evaluation](#evaluation)
+        - [Optional: Perform bootstrapping to get confidence intervals](#optional-perform-bootstrapping-to-get-confidence-intervals)
+        - [Download inference results from baseline and fine-tned model](#download-inference-results-from-baseline-and-fine-tned-model)
   - [Results](#results)
-  - [Fine-Tuned Model Weights](#fine-tuned-model)
-  - [Paper](#paper)
+  - [Fine-Tuned Model](#fine-tuned-model)
   - [Dataset](#dataset)
+  - [Paper](#paper)
 
 This repo provides scripts to fine-tune YOLO models on the MMLA dataset. The [MMLA dataset](https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182) is a collection of low-altitude aerial footage of various species in different environments. The dataset is designed to help researchers and practitioners develop and evaluate object detection models for wildlife monitoring and conservation.
 
