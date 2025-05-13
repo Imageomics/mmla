@@ -1,0 +1,64 @@
+abstract: "Scripts for training YOLO models and evaluating on MMLA dataset"
+authors:
+- family-names: Kline
+  given-names: Jenna
+  orcid: "https://orcid.org/0009-0006-7301-5774"
+cff-version: 1.2.0
+date-released: "2024-05-25"
+identifiers:
+  - description: "The GitHub release URL of tag v1.0.0."
+    type: url
+    value: 
+  - description: "The GitHub URL of the commit tagged with v1.0.0."
+    type: url
+    value: 
+keywords:
+  - imageomics
+  - zebra
+  - giraffe
+  - "plains zebra"
+  - "Grevy's zebra"
+  - conservation
+  - drone
+  - UAV
+  - imbalanced
+  - Kenya
+  - "Mpala Research Centre"
+  - "Ol Pejeta Conservancy"
+  - CVAT
+  - YOLO
+license: MIT
+message: "If you use this software, please cite it using these metadata."
+repository-code: "https://github.com/Imageomics/mmla"
+title: "MMLA"
+version: 1.0.0
+doi: 
+type: software
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Kline
+      given-names: Jenna
+      orcid: "https://orcid.org/0009-0006-7301-5774"
+    - family-names: Stevens
+      given-names: Samuel
+    - family-names: Maalouf
+      given-names: Guy
+    - family-names: Saint-Jean
+      given-names: Camille Rondeau
+    - family-names: Ngoc
+      given-names: Dat Nguyen
+    - family-names: Mirmehdi
+      given-names: Majid
+    - family-names: Guerin
+      given-names: David
+    - family-names: Burghardt
+      given-names: Tilo
+    - family-names: Pastucha
+      given-names: Elzbieta
+    - family-names: Costelloe
+      given-names: Blair
+  title: "MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset"
+  journal: "arXiv preprint arXiv:2504.07744"
+  year: 2025
+  doi: https://doi.org/10.48550/arXiv.2504.07744
