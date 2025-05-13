@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset</title>
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #2e86c1;
+            --accent-color: #3498db;
+            --light-bg: #f8f9fa;
+            --dark-text: #333;
+            --light-text: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .authors {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: var(--secondary-color);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .summary-box {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .citation {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .overview-item {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .overview-item h3 {
+            margin-top: 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+        
+        .gallery-caption {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset</h1>
+            <p class="authors">Jenna Kline, Samuel Stevens, Guy Maalouf, Camille Rondeau Saint-Jean, Dat Nguyen Ngoc, Majid Mirmehdi, David Guerin, Tilo Burghardt, Elzbieta Pastucha, Blair Costelloe, Matthew Watson, Thomas Richardson, and Ulrik Pagh Schultz Lundquist.</p>
+            <div>
+                <a href="https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182" class="button">Dataset</a>
+                <a href="https://huggingface.co/imageomics/mmla" class="button">Model</a>
+                <a href="https://arxiv.org/abs/2504.07744" class="button">Paper</a>
+                <a href="https://github.com/imageomics/mmla" class="button">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <img src="/api/placeholder/1200/500" alt="Zebras and giraffes at the Mpala Research Centre in Kenya" class="hero-image">
+        <p><em>Example photo from the MMLA dataset and labels generated from model. The image shows a group of zebras and giraffes at the Mpala Research Centre in Kenya.</em></p>
+
+        <div class="summary-box">
+            <p>The MMLA (Multi-Environment, Multi-Species, Low-Altitude Aerial Footage) dataset is a collection of 155,074 frames of low-altitude aerial footage of various species in different environments. The dataset is designed to help researchers and practitioners develop and evaluate object detection models for wildlife monitoring and conservation.</p>
+            <p>This project provides a fine-tuned YOLO11m model trained on the MMLA dataset, enabling more accurate detection of wildlife in aerial imagery across diverse environments.</p>
+        </div>
+
+        <div class="overview-grid">
+            <div class="overview-item">
+                <h3>Multi-Environment</h3>
+                <p>MMLA includes footage from three distinct locations: Ol Pejeta Conservancy (Kenya), Mpala Research Center (Kenya), and The Wilds Conservation Center (USA).</p>
+            </div>
+            <div class="overview-item">
+                <h3>Multi-Species</h3>
+                <p>The dataset contains annotations for multiple species including Plains zebra, Grevy's zebra, Reticulated giraffe, Masai giraffe, Persian onager, and African wild dog.</p>
+            </div>
+            <div class="overview-item">
+                <h3>Low-Altitude</h3>
+                <p>All footage is captured from low-altitude aerial platforms, providing a realistic dataset for practical wildlife monitoring applications.</p>
+            </div>
+        </div>
+
+        <section id="results" class="section">
+            <h2>Results</h2>
+            <p>Our fine-tuned YOLO11m model achieves the following performance on the MMLA dataset:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Images</th>
+                        <th>Instances</th>
+                        <th>Box(P)</th>
+                        <th>R</th>
+                        <th>mAP50</th>
+                        <th>mAP50-95</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>all</td>
+                        <td>7,658</td>
+                        <td>44,619</td>
+                        <td>0.867</td>
+                        <td>0.764</td>
+                        <td>0.801</td>
+                        <td>0.488</td>
+                    </tr>
+                    <tr>
+                        <td>Zebra</td>
+                        <td>4,430</td>
+                        <td>28,219</td>
+                        <td>0.768</td>
+                        <td>0.647</td>
+                        <td>0.675</td>
+                        <td>0.273</td>
+                    </tr>
+                    <tr>
+                        <td>Giraffe</td>
+                        <td>868</td>
+                        <td>1,357</td>
+                        <td>0.788</td>
+                        <td>0.634</td>
+                        <td>0.678</td>
+                        <td>0.314</td>
+                    </tr>
+                    <tr>
+                        <td>Onager</td>
+                        <td>172</td>
+                        <td>1,584</td>
+                        <td>0.939</td>
+                        <td>0.776</td>
+                        <td>0.857</td>
+                        <td>0.505</td>
+                    </tr>
+                    <tr>
+                        <td>Dog</td>
+                        <td>3,022</td>
+                        <td>13,459</td>
+                        <td>0.973</td>
+                        <td>0.998</td>
+                        <td>0.995</td>
+                        <td>0.860</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+                <section id="dataset-gallery" class="section">
+            <h2>Dataset Gallery</h2>
+            <p>Representative images from the MMLA dataset showcasing different environments and species:</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/P0940098_P0940098_20250311_000193.jpg" alt="Ol Pejeta Session 2 showing wildlife" />
+                    <div class="gallery-caption">Ol Pejeta Session 2</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/DJI_0002_DJI_0002_DJI0002_002377.jpg" alt="Mpala Session 1 showing wildlife" />
+                    <div class="gallery-caption">Mpala Session 1</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/P0090009_P0090009_20250310_000587.jpg" alt="The Wilds Session 3 showing wildlife" />
+                    <div class="gallery-caption">The Wilds Session 3</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/DJI_DJI_0035_DJI0035_004610.jpg" alt="The Wilds Session 1 showing wildlife" />
+                    <div class="gallery-caption">The Wilds Session 1</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/P0090009_P0090009_20250310_000587.jpg" alt="The Wilds Session 2 showing wildlife" />
+                    <div class="gallery-caption">The Wilds Session 2</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/P0070010_P0070010_20250311_000255.jpg" alt="The Wilds Session 4 showing wildlife" />
+                    <div class="gallery-caption">The Wilds Session 4</div>
+                </div>
+            </div>
+            
+            <p><em>Figure: Representative images from the MMLA dataset showing various environments and species from different collection sessions.</em></p>
+        </section></h3>
+                    <p>Facilitates research on wildlife populations through non-invasive monitoring methods that can count and track animal groups.</p>
+                </div>
+                
+                <div class="overview-item">
+                    <h3>Behavioral Analysis</h3>
+                    <p>Supports studies of animal behavior by providing aerial perspectives that capture group dynamics and movement patterns.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="model" class="section">
+            <h2>Fine-Tuned Model</h2>
+            <p>We provide a fine-tuned YOLO11m model that has been trained on the MMLA dataset. The model achieves state-of-the-art performance for wildlife detection in aerial imagery.</p>
+            <p>Full model weights and details are available on <a href="https://huggingface.co/imageomics/mmla">HuggingFace</a>.</p>
+        </section>
+
+        <section id="dataset-details" class="section">
+            <h2>Dataset Details</h2>
+            
+            <p>The MMLA dataset comprises 155,074 frames from 11 sessions across 3 locations, featuring multiple species of wildlife captured from low-altitude aerial footage.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Session</th>
+                        <th>Date</th>
+                        <th>Frames</th>
+                        <th>Species</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">Ol Pejeta Conservancy, Kenya</td>
+                        <td>1</td>
+                        <td>1/31/25</td>
+                        <td>16,726</td>
+                        <td>Plains zebra</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2/1/25</td>
+                        <td>12,542</td>
+                        <td>Plains zebra</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><em>Subtotal:</em></td>
+                        <td><em>29,268</em></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td rowspan="5">Mpala Research Center, Kenya</td>
+                        <td>1</td>
+                        <td>1/12/23</td>
+                        <td>16,891</td>
+                        <td>Reticulated giraffe</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1/17/23</td>
+                        <td>11,165</td>
+                        <td>Plains zebra</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>1/18/23</td>
+                        <td>17,940</td>
+                        <td>Grevy's zebra</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>1/20/23</td>
+                        <td>33,960</td>
+                        <td>Grevy's zebra</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>1/21/23</td>
+                        <td>24,106</td>
+                        <td>Giraffe, Plains and Grevy's zebras</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><em>Subtotal:</em></td>
+                        <td><em>104,062</em></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td rowspan="4">The Wilds Conservation Center, USA</td>
+                        <td>1</td>
+                        <td>6/14/24</td>
+                        <td>13,749</td>
+                        <td>African wild dog</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>7/31/24</td>
+                        <td>3,436</td>
+                        <td>Reticulated and Masai giraffe</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4/18/24</td>
+                        <td>4,053</td>
+                        <td>Persian onager</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>7/31/24</td>
+                        <td>506</td>
+                        <td>Grevy's zebra</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><em>Subtotal:</em></td>
+                        <td><em>21,744</em></td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                        <td><strong>155,074</strong></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Key Dataset Features</h3>
+            <ul>
+                <li><strong>Multi-Environment:</strong> Data collected across various conservation areas in Kenya and the United States</li>
+                <li><strong>Multi-Species:</strong> Contains footage of multiple species including:
+                    <ul>
+                        <li>Plains zebra</li>
+                        <li>Grevy's zebra</li>
+                        <li>Reticulated giraffe</li>
+                        <li>Masai giraffe</li>
+                        <li>Persian onager</li>
+                        <li>African wild dog</li>
+                    </ul>
+                </li>
+                <li><strong>Low-Altitude:</strong> All footage captured from aerial platforms at low altitude to simulate practical wildlife monitoring scenarios</li>
+                <li><strong>High-Quality Annotations:</strong> All frames include detailed bounding box annotations for wildlife detection</li>
+            </ul>
+            
+            <p>The dataset is split into three main collections that are available on <a href="https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182">HuggingFace</a>:</p>
+            <ul>
+                <li><a href="https://huggingface.co/datasets/imageomics/mmla_wilds">MMLA Wilds</a>: Footage from The Wilds Conservation Center in the USA</li>
+                <li><a href="https://huggingface.co/datasets/imageomics/mmla_opc">MMLA OPC</a>: Footage from Ol Pejeta Conservancy in Kenya</li>
+                <li><a href="https://huggingface.co/datasets/imageomics/mmla_mpala">MMLA Mpala</a>: Footage from the Mpala Research Center in Kenya</li>
+            </ul>
+        </section>
+
+        <section id="citation" class="section">
+            <h2>Citation</h2>
+            <p>If you use this dataset or model in your research, please cite our paper:</p>
+            <div class="citation">@article{kline2025mmla,
+  title={MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset},
+  author={Kline, Jenna and Stevens, Samuel and Maalouf, Guy and Saint-Jean, Camille Rondeau and Ngoc, Dat Nguyen and Mirmehdi, Majid and Guerin, David and Burghardt, 
+    Tilo and Pastucha, Elzbieta and Costelloe, Blair, Watson, Matthew and Richardson, Thomas and Lundquist, Ulrik Pagh Schultz Lundquist},
+  journal={arXiv preprint arXiv:2504.07744},
+  year={2025}
+}</div>
+        </section>
+
+        <section id="acknowledgements" class="section">
+            <h2>Acknowledgements</h2>
+            <p>
+            We want to thank Samuel Mutisya and William Njoroge at Ol Pejeta Conservancy for their support in facilitating the WildDrone 2025 Hackathon. We would like to thank Dan Beetem and The Wilds for their support in collecting the data. 
+            This work was supported by WildDroneEU (EU Horizon Europe MSCA grant 101071224), the Imageomics Institute (NSF HDR Award 2118240), and ICICLE (NSF grant OAC-2112606).
+            </p>
+            <p>Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>MMLA: Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset</p>
+            <p>&copy; 2025 Imageomics Institute</p>
+        </div>
+    </footer>
+</body>
+</html>
