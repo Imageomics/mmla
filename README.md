@@ -33,36 +33,20 @@ conda create --name yolo_env --file requirements.txt
 pip install -r requirements.txt
 ```
 
-
-
-## Baseline YOLO evaluation
-### Download evaluation data from HuggingFace
-This dataset contains an evenly distributed set of frames from the MMLA dataset, with bounding box annotations for each frame. The dataset is designed to help researchers and practitioners evaluate the performance of object detection models on low-altitude aerial footage containing a variety of environments and species.
-
-```bash
-# download the datasets from HuggingFace to local /data directory 
-
-git clone 
-```
-
-### Run the evaluate_yolo script
-```bash
-# example usage
-python model_eval/evaluate_yolo.py --model model_eval/yolov5mu.pt  --images model_eval/eval_data/frames_500_coco --annotations model_eval/eval_data/frames_500_coco --output model_eval/results/frames_500_coco/yolov5m
-
-```
 ## Model Training
 
 ### Prepare the dataset
 ```bash
-# download the datasets from HuggingFace to local /data directory 
+# download the datasets from HuggingFace to local /dataset directory 
+mkdir -p dataset
+cd data
 
 # wilds dataset
-git clone https://huggingface.co/datasets/imageomics/wildwing_wilds
+git clone https://huggingface.co/datasets/imageomics/mmla_wilds
 # opc dataset
-git clone https://huggingface.co/datasets/imageomics/wildwing_opc
+git clone https://huggingface.co/datasets/imageomics/mmla_opc
 # mpala dataset
-git clone https://huggingface.co/datasets/imageomics/wildwing_mpala
+git clone https://huggingface.co/datasets/imageomics/mmla_mpala
 
 # run the script to split the dataset into train and test sets
 python prepare_yolo_dataset.py
@@ -71,16 +55,17 @@ python prepare_yolo_dataset.py
 
 #### Alternatively, you can create your own dataset from video frames and bounding box annotations
 ```bash
-python frame_extractor.py --dataset wilds --dataset_path ./wildwing_wilds --output_dir ./wildwing_wilds
+python frame_extractor.py --dataset wilds --dataset_path ./mmla_wilds --output_dir ./wildwing_wilds
 
 ```
 ### Optional: Downsample the frames to extract a subset of frames from each video
 ```bash
-python downsample.py --dataset wilds --dataset_path ./wildwing_wilds --output_dir ./wildwing_wilds --downsample_rate 0.1
+python downsample.py --dataset wilds --dataset_path ./mmla_wilds --output_dir ./mmla_wilds --downsample_rate 0.1
 ```
 
 ### Run the training script
 ```bash
+cd model
 # run the training script
 python train.py
 ```
@@ -94,6 +79,7 @@ python validate.py
 
 ### Optional: Perform bootstrapping to get confidence intervals
 ```bash
+cd analysis
 # run the evaluation script
 bootstrap.ipynb
 ```
