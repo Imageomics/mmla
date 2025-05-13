@@ -111,10 +111,10 @@ Our fine-tuned YOLO11m model achieves the following performance on the MMLA data
 
 
 # Fine-Tuned Model
-See [HuggingFace Repo](https://huggingface.co/imageomics/mmla) for details and weights.
+See [HuggingFace Model Repo](https://huggingface.co/imageomics/mmla) for details and weights.
 
 # Dataset
-See [HuggingFace Repo](https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182) for MMLA dataset.
+See [HuggingFace Dataset Repo](https://huggingface.co/collections/imageomics/wildwing-67f572d3ba17fca922c80182) for MMLA dataset.
 
 # Paper
 ```bibtex
