@@ -1,7 +1,7 @@
 # MMLA Repo
 Multi-Environment, Multi-Species, Low-Altitude Aerial Footage Dataset
 
-![zebras_giraffes](vizualizations/location_1_session_5_DJI_0211_partition_1_DJI_0211_002590.jpg)
+![zebras_giraffes](docs/images/hero-image.jpg)
 Example photo from the MMLA dataset and labels generated from model. The image shows a group of zebras and giraffes at the Mpala Research Centre in Kenya. 
 ## Table of Contents
   - [How to use the scripts in this repo](#how-to-use-the-scripts-in-this-repo)
