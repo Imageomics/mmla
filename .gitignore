@@ -45,3 +45,8 @@ TODO.md
 # Ignore large files 
 /data
 
+analysis.ipynb
+./results_analysis/
+
+# ignore checkpoints
+checkpoints/
