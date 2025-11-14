@@ -40,11 +40,11 @@ mkdir -p dataset
 cd data
 
 # wilds dataset
-git clone https://huggingface.co/datasets/imageomics/mmla_wilds
+huggingface-cli download --repo-type dataset imageomics/mmla_wilds
 # opc dataset
-git clone https://huggingface.co/datasets/imageomics/mmla_opc
+huggingface-cli download --repo-type dataset imageomics/mmla_opc
 # mpala dataset
-git clone https://huggingface.co/datasets/imageomics/mmla_mpala
+huggingface-cli download --repo-type dataset imageomics/mmla_mpala
 
 # run the script to split the dataset into train and test sets
 python prepare_yolo_dataset.py
